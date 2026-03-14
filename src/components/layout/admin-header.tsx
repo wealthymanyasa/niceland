@@ -2,11 +2,22 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Menu, X, Settings, LogOut, Home, Package, Users, BarChart3 } from 'lucide-react'
 
 export function AdminHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    // Clear any admin-related data or tokens if needed
+    localStorage.removeItem('adminToken')
+    localStorage.removeItem('adminUser')
+    
+    // Redirect to login page
+    router.push('/auth/signin')
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 backdrop-blur-sm shadow-sm">
@@ -60,8 +71,8 @@ export function AdminHeader() {
               Store
             </Link>
             <Button
-              variant="outline"
-              className="hover:border-red-600 hover:text-red-600"
+              onClick={handleLogout}
+              className="hover:border-red-600 hover:text-red-600 bg-white hover:bg-red-50"
             >
               <LogOut className="h-4 w-4 mr-2" />
               Logout
@@ -122,9 +133,11 @@ export function AdminHeader() {
                 Store
               </Link>
               <Button
-                variant="outline"
-                className="w-full hover:border-red-600 hover:text-red-600"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => {
+                  handleLogout()
+                  setIsMenuOpen(false)
+                }}
+                className="w-full hover:border-red-600 hover:text-red-600 hover:bg-red-50"
               >
                 <LogOut className="h-4 w-4 mr-2" />
                 Logout
