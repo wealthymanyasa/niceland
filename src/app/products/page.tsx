@@ -250,11 +250,7 @@ export default function Products() {
                         key={page}
                         variant={currentPage === page ? "default" : "outline"}
                         onClick={() => handlePageChange(page)}
-                        className={`w-10 h-10 p-0 ${
-                          currentPage === page
-                            ? 'bg-gradient-to-r from-blue-600 to-orange-600 text-white'
-                            : 'hover:border-blue-600 hover:text-blue-600'
-                        }`}
+                        className={`w-10 h-10 p-0 ${currentPage === page ? 'bg-gradient-to-r from-blue-600 to-orange-600 text-white' : 'hover:border-blue-600 hover:text-blue-600'}`}
                       >
                         {page}
                       </Button>
@@ -278,7 +274,7 @@ export default function Products() {
               Showing {getCurrentPageProducts().length} of {products.length} products
               {totalPages > 1 && (
                 <span className="ml-2">
-                  | Page {currentPage} of {totalPages}
+                  {' | Page ' + currentPage + ' of ' + totalPages}
                 </span>
               )}
             </div>
