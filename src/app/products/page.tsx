@@ -214,7 +214,7 @@ export default function Products() {
             </div>
 
             {/* Empty State */}
-            {!loading && products.length === 0 && (
+          {products.length === 0 && !loading && (
               <div className="text-center py-16">
                 <div className="bg-white p-8 max-w-md mx-auto rounded-2xl shadow-lg border border-gray-200">
                   <div className="w-24 h-24 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
