@@ -7,19 +7,24 @@ import { ProductImage } from '@/components/ui/product-image'
 import { useCartStore } from '@/store/cart-store'
 import { getProducts } from '@/lib/products'
 import { Product } from '@/types'
-import { ShoppingCart, Heart, Share2 } from 'lucide-react'
+import { ShoppingCart, Heart, Share2, ChevronLeft, ChevronRight } from 'lucide-react'
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedSize, setSelectedSize] = useState<{ [key: string]: string }>({})
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
   const { addItem } = useCartStore()
+
+  const PRODUCTS_PER_PAGE = 12
 
   useEffect(() => {
     const loadProducts = async () => {
       try {
         const fetchedProducts = await getProducts()
         setProducts(fetchedProducts)
+        setTotalPages(Math.ceil(fetchedProducts.length / PRODUCTS_PER_PAGE))
       } catch (error) {
         console.error('Failed to load products:', error)
       } finally {
@@ -29,6 +34,17 @@ export default function Products() {
 
     loadProducts()
   }, [])
+
+  const getCurrentPageProducts = () => {
+    const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE
+    const endIndex = startIndex + PRODUCTS_PER_PAGE
+    return products.slice(startIndex, endIndex)
+  }
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   const handleAddToCart = (product: Product) => {
     const size = selectedSize[product.id]
@@ -91,8 +107,10 @@ export default function Products() {
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {products.map((product) => (
+            <div className="space-y-8">
+              {/* Products Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                {getCurrentPageProducts().map((product) => (
                 <div key={product.id} className="group relative">
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300 blur-xl"></div>
                   <div className="relative bg-white p-6 rounded-2xl border border-gray-200 hover:border-blue-500/50 transition-all duration-300 transform hover:-translate-y-2 shadow-lg hover:shadow-xl overflow-hidden">
@@ -194,24 +212,77 @@ export default function Products() {
                 </div>
               ))}
             </div>
-          )}
-          
-          {!loading && products.length === 0 && (
-            <div className="text-center py-16">
-              <div className="bg-white p-8 max-w-md mx-auto rounded-2xl shadow-lg border border-gray-200">
-                <div className="w-24 h-24 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <span className="text-4xl">📦</span>
+
+            {/* Empty State */}
+            {!loading && products.length === 0 && (
+              <div className="text-center py-16">
+                <div className="bg-white p-8 max-w-md mx-auto rounded-2xl shadow-lg border border-gray-200">
+                  <div className="w-24 h-24 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <span className="text-4xl">📦</span>
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2 text-gray-900">No products found</h3>
+                  <p className="text-gray-600 mb-4 leading-relaxed">
+                    We're currently updating our inventory. Check back soon for amazing shoes!
+                  </p>
+                  <Button className="bg-gradient-to-r from-blue-600 to-orange-600 hover:from-blue-700 hover:to-orange-700 text-white font-bold px-6 py-3 rounded-full">
+                    Notify Me When Available
+                  </Button>
                 </div>
-                <h3 className="text-2xl font-bold mb-2 text-gray-900">No products found</h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">
-                  We're currently updating our inventory. Check back soon for amazing shoes!
-                </p>
-                <Button className="bg-gradient-to-r from-blue-600 to-orange-600 hover:from-blue-700 hover:to-orange-700 text-white font-bold px-6 py-3 rounded-full">
-                  Notify Me When Available
+              </div>
+            )}
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="flex justify-center items-center space-x-4 mt-12">
+                <Button
+                  variant="outline"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className="flex items-center"
+                >
+                  <ChevronLeft className="h-4 w-4 mr-2" />
+                  Previous
+                </Button>
+
+                <div className="flex items-center space-x-2">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                    <Button
+                      key={page}
+                      variant={currentPage === page ? "default" : "outline"}
+                      onClick={() => handlePageChange(page)}
+                      className={`w-10 h-10 p-0 ${
+                        currentPage === page
+                          ? 'bg-gradient-to-r from-blue-600 to-orange-600 text-white'
+                          : 'hover:border-blue-600 hover:text-blue-600'
+                      }`}
+                    >
+                      {page}
+                    </Button>
+                  ))}
+                </div>
+
+                <Button
+                  variant="outline"
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className="flex items-center"
+                >
+                  Next
+                  <ChevronRight className="h-4 w-4 ml-2" />
                 </Button>
               </div>
+            )}
+
+            {/* Products Info */}
+            <div className="text-center mt-8 text-gray-600">
+              Showing {getCurrentPageProducts().length} of {products.length} products
+              {totalPages > 1 && (
+                <span className="ml-2">
+                  | Page {currentPage} of {totalPages}
+                </span>
+              )}
             </div>
-          )}
+          </div>
         </div>
       </main>
     </div>
