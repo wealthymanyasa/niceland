@@ -1,36 +1,138 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NiceLand - AI-Powered Shoe Store
 
-## Getting Started
+A modern e-commerce platform for shoes with AI-powered recommendations and chat assistance.
 
-First, run the development server:
+## 🚀 Features
 
+- **Product Catalog**: Browse and search shoes with advanced filtering
+- **AI Chat Assistant**: Get personalized shoe recommendations via OpenAI
+- **Shopping Cart**: Add items and manage your cart
+- **Secure Checkout**: Stripe integration for payments
+- **User Authentication**: Secure login/signup with Supabase
+- **Admin Panel**: Manage products and orders
+- **Responsive Design**: Mobile-first UI with Tailwind CSS
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Next.js 14, TypeScript, Tailwind CSS
+- **UI Components**: shadcn/ui
+- **State Management**: Zustand
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth
+- **Payments**: Stripe
+- **AI**: OpenAI API
+- **Search**: Algolia
+- **Deployment**: Vercel
+
+## 📋 Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+- Supabase account
+- Stripe account
+- OpenAI API key
+
+## 🚀 Getting Started
+
+1. **Clone the repository**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/CODESTAR/nike-ai-store.git
+cd nike-ai-store
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install dependencies**
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Set up environment variables**
+```bash
+cp .env.example .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Add your API keys to `.env.local`:
+```env
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
 
-## Learn More
+# Stripe
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+STRIPE_SECRET_KEY=your_stripe_secret_key
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
 
-To learn more about Next.js, take a look at the following resources:
+# OpenAI
+OPENAI_API_KEY=your_openai_api_key
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Algolia
+NEXT_PUBLIC_ALGOLIA_APP_ID=your_algolia_app_id
+NEXT_PUBLIC_ALGOLIA_SEARCH_KEY=your_algolia_search_key
+ALGOLIA_ADMIN_KEY=your_algolia_admin_key
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. **Set up Supabase database**
+- Import the SQL schema from `docs/supabase-schema.sql`
+- Configure authentication providers
 
-## Deploy on Vercel
+5. **Run the development server**
+```bash
+npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📁 Project Structure
+
+```
+src/
+├── app/                 # Next.js app directory
+├── components/          # Reusable UI components
+│   ├── ui/             # shadcn/ui components
+│   ├── forms/          # Form components
+│   └── layout/         # Layout components
+├── lib/                # Utility functions and configurations
+├── hooks/              # Custom React hooks
+├── store/              # Zustand stores
+├── types/              # TypeScript type definitions
+└── utils/              # Helper functions
+```
+
+## 🗄️ Database Schema
+
+The application uses three main tables:
+- **users**: Customer profiles with preferences
+- **products**: Shoe inventory with sizes and images
+- **orders**: Customer orders with status tracking
+
+See `docs/supabase-schema.sql` for the complete schema.
+
+## 🧪 Development
+
+### Running Tests
+```bash
+npm run test
+```
+
+### Building for Production
+```bash
+npm run build
+npm start
+```
+
+### Linting
+```bash
+npm run lint
+```
+
+## 🚀 Deployment
+
+The easiest way to deploy is using [Vercel](https://vercel.com):
+
+1. Connect your GitHub repository to Vercel
+2. Add environment variables
+3. Deploy!
+
+## 📄 License
+
+This project is licensed under the MIT License.
