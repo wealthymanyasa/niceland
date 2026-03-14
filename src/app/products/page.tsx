@@ -232,46 +232,46 @@ export default function Products() {
             )}
 
             {/* Pagination Controls */}
-            {totalPages > 1 && (
-              <div className="flex justify-center items-center space-x-4 mt-12">
-                <Button
-                  variant="outline"
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 1}
-                  className="flex items-center"
-                >
-                  <ChevronLeft className="h-4 w-4 mr-2" />
-                  Previous
-                </Button>
+              {totalPages > 1 && (
+                <div className="flex justify-center items-center space-x-4 mt-12">
+                  <Button
+                    variant="outline"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="flex items-center"
+                  >
+                    <ChevronLeft className="h-4 w-4 mr-2" />
+                    Previous
+                  </Button>
 
-                <div className="flex items-center space-x-2">
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                    <Button
-                      key={page}
-                      variant={currentPage === page ? "default" : "outline"}
-                      onClick={() => handlePageChange(page)}
-                      className={`w-10 h-10 p-0 ${
-                        currentPage === page
-                          ? 'bg-gradient-to-r from-blue-600 to-orange-600 text-white'
-                          : 'hover:border-blue-600 hover:text-blue-600'
-                      }`}
-                    >
-                      {page}
-                    </Button>
-                  ))}
+                  <div className="flex items-center space-x-2">
+                    {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+                      <Button
+                        key={page}
+                        variant={currentPage === page ? "default" : "outline"}
+                        onClick={() => handlePageChange(page)}
+                        className={`w-10 h-10 p-0 ${
+                          currentPage === page
+                            ? 'bg-gradient-to-r from-blue-600 to-orange-600 text-white'
+                            : 'hover:border-blue-600 hover:text-blue-600'
+                        }`}
+                      >
+                        {page}
+                      </Button>
+                    ))}
+                  </div>
+
+                  <Button
+                    variant="outline"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="flex items-center"
+                  >
+                    Next
+                    <ChevronRight className="h-4 w-4 ml-2" />
+                  </Button>
                 </div>
-
-                <Button
-                  variant="outline"
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                  className="flex items-center"
-                >
-                  Next
-                  <ChevronRight className="h-4 w-4 ml-2" />
-                </Button>
-              </div>
-            )}
+              )}
 
             {/* Products Info */}
             <div className="text-center mt-8 text-gray-600">
