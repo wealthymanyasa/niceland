@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Shield, Eye, EyeOff, AlertCircle } from 'lucide-react'
 
@@ -15,7 +16,7 @@ export default function AdminSignIn() {
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  useState(() => {
+  useEffect(() => {
     const errorParam = searchParams.get('error')
     if (errorParam === 'unauthorized') {
       setError('You must be an admin to access this page.')
@@ -141,12 +142,12 @@ export default function AdminSignIn() {
 
           {/* Back to Store */}
           <div className="mt-6 text-center">
-            <a
+            <Link
               href="/"
               className="text-blue-600 hover:text-blue-700 text-sm font-medium"
             >
               ← Back to Store
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -99,14 +99,16 @@ export default function ProductDetail() {
   }
 
   const handleShare = () => {
+    const currentUrl = typeof window !== 'undefined' ? window.location.href : ''
+    
     if (navigator.share) {
       navigator.share({
         title: product.name,
         text: product.description,
-        url: window.location.href
+        url: currentUrl
       })
     } else {
-      navigator.clipboard.writeText(window.location.href)
+      navigator.clipboard.writeText(currentUrl)
       alert('Product link copied to clipboard!')
     }
   }

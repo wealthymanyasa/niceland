@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { useAuthStore } from '@/store/auth-store'
 import { supabase } from '@/lib/supabase'
@@ -205,20 +206,20 @@ export default function SignUp() {
           <div className="mt-6 text-center">
             <p className="text-gray-600">
               Already have an account?{' '}
-              <a href="/auth/signin" className="text-blue-600 hover:text-blue-700 font-medium">
+              <Link href="/auth/signin" className="text-blue-600 hover:text-blue-700 font-medium">
                 Sign in
-              </a>
+              </Link>
             </p>
           </div>
 
           {/* Back to Store */}
           <div className="mt-4 text-center">
-            <a
+            <Link
               href="/"
               className="text-blue-600 hover:text-blue-700 text-sm font-medium"
             >
               ← Back to Store
-            </a>
+            </Link>
           </div>
         </div>
       </div>
