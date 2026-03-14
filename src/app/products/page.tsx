@@ -245,16 +245,22 @@ export default function Products() {
                   </Button>
 
                   <div className="flex items-center space-x-2">
-                    {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
-                      <Button
-                        key={page}
-                        variant={currentPage === page ? "default" : "outline"}
-                        onClick={() => handlePageChange(page)}
-                        className={`w-10 h-10 p-0 ${currentPage === page ? 'bg-gradient-to-r from-blue-600 to-orange-600 text-white' : 'hover:border-blue-600 hover:text-blue-600'}`}
-                      >
-                        {page}
-                      </Button>
-                    ))}
+                    {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => {
+                      const buttonClass = currentPage === page 
+                        ? 'bg-gradient-to-r from-blue-600 to-orange-600 text-white' 
+                        : 'hover:border-blue-600 hover:text-blue-600'
+                      
+                      return (
+                        <Button
+                          key={page}
+                          variant={currentPage === page ? "default" : "outline"}
+                          onClick={() => handlePageChange(page)}
+                          className={`w-10 h-10 p-0 ${buttonClass}`}
+                        >
+                          {page}
+                        </Button>
+                      )
+                    })}
                   </div>
 
                   <Button
