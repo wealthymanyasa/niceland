@@ -177,7 +177,7 @@ export default function Cart() {
                 </div>
                 
                 <div className="border-t border-gray-200 pt-6">
-                  <div className="flex justify-between mb-6">
+                  <div className="flex justify-between mb-8">
                     <span className="text-xl font-semibold text-gray-900">Total:</span>
                     <span className="text-2xl font-bold text-gray-900">
                       <span className="bg-gradient-to-r from-blue-600 to-orange-600 bg-clip-text text-transparent">
@@ -186,32 +186,36 @@ export default function Cart() {
                     </span>
                   </div>
                   
-                  <div className="space-y-3">
-                    <Link href="/checkout">
-                      <Button 
-                        className="w-full bg-gradient-to-r from-blue-600 to-orange-600 hover:from-blue-700 hover:to-orange-700 text-white font-bold px-6 py-4 rounded-full text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300" 
-                        size="lg"
-                      >
-                        Proceed to Checkout
-                      </Button>
-                    </Link>
+                  <div className="flex flex-col gap-2">
+                    <div className="mb-2">
+                      <Link href="/checkout">
+                        <Button 
+                          className="w-full bg-gradient-to-r from-blue-600 to-orange-600 hover:from-blue-700 hover:to-orange-700 text-white font-semibold px-6 py-4 rounded-xl text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300" 
+                          size="lg"
+                        >
+                          Proceed to Checkout
+                        </Button>
+                      </Link>
+                    </div>
                     
-                    <Link href="/products">
+                    <div className="grid grid-cols-2 gap-4">
+                      <Link href="/products">
+                        <Button
+                          variant="outline"
+                          className="w-full hover:border-blue-600 hover:text-blue-600 hover:bg-blue-50 font-medium px-4 py-4 rounded-xl border-2"
+                        >
+                          Continue Shopping
+                        </Button>
+                      </Link>
+                      
                       <Button
                         variant="outline"
-                        className="w-full hover:border-blue-600 hover:text-blue-600 hover:bg-blue-50 font-medium px-4 py-3 rounded-lg"
+                        className="w-full text-red-600 hover:text-red-700 hover:bg-red-50 hover:border-red-300 font-medium px-4 py-4 rounded-xl border-2"
+                        onClick={clearCart}
                       >
-                        Continue Shopping
+                        Clear Cart
                       </Button>
-                    </Link>
-                    
-                    <Button
-                      variant="ghost"
-                      className="w-full text-red-600 hover:text-red-700 hover:bg-red-50 font-medium"
-                      onClick={clearCart}
-                    >
-                      Clear Cart
-                    </Button>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -382,17 +382,17 @@ export default function Checkout() {
                         type="button"
                         variant="outline"
                         onClick={() => setStep(1)}
-                        className="flex-1"
+                        className="flex-1 justify-center"
                       >
-                        Back to Shipping
+                        ← Back to Shipping
                       </Button>
                       <Button
                         type="submit"
                         disabled={loading}
-                        className="flex-1 bg-gradient-to-r from-blue-600 to-orange-600 hover:from-blue-700 hover:to-orange-700 text-white font-bold px-6 py-3 rounded-full"
+                        className="flex-1 bg-gradient-to-r from-blue-600 to-orange-600 hover:from-blue-700 hover:to-orange-700 text-white font-bold px-6 py-3 rounded-full justify-center"
                       >
                         {loading ? (
-                          <div className="flex items-center">
+                          <div className="flex items-center justify-center">
                             <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
                             Processing...
                           </div>
