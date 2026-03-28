@@ -99,79 +99,7 @@ export default function Products() {
             </p>
           </div>
           
-          {/* Trusted by Thousands Section */}
-          <div className="mb-16">
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
-              <h2 className="text-2xl font-bold mb-6 text-gray-900 text-center">Trusted by Thousands</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div className="relative group">
-                  <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl p-6 border border-blue-200 hover:border-blue-400 transition-all duration-300">
-                    <div className="aspect-video bg-black rounded-lg mb-4 relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 flex items-center justify-center">
-                        <div className="text-white text-6xl font-bold">👟</div>
-                      </div>
-                      <div className="text-center text-white/80 text-sm mt-2">Premium Collection</div>
-                    </div>
-                    <h3 className="text-lg font-semibold mb-2 text-gray-900">Classic Excellence</h3>
-                    <p className="text-gray-600 text-sm">Time-tested designs trusted by generations</p>
-                  </div>
-                </div>
-                <div className="relative group">
-                  <div className="bg-gradient-to-br from-orange-50 to-red-100 rounded-xl p-6 border border-orange-200 hover:border-orange-400 transition-all duration-300">
-                    <div className="aspect-video bg-black rounded-lg mb-4 relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-r from-orange-600/20 to-red-600/20 flex items-center justify-center">
-                        <div className="text-white text-6xl font-bold">👟</div>
-                      </div>
-                      <div className="text-center text-white/80 text-sm mt-2">Athletic Performance</div>
-                    </div>
-                    <h3 className="text-lg font-semibold mb-2 text-gray-900">Sport Innovation</h3>
-                    <p className="text-gray-600 text-sm">Cutting-edge technology for athletes</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          {/* Trending Now Section */}
-          <div className="mb-12">
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
-              <h2 className="text-2xl font-bold mb-6 text-gray-900 text-center">Trending Now</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div className="relative group">
-                  <div className="bg-gradient-to-br from-purple-50 to-pink-100 rounded-xl p-6 border border-purple-200 hover:border-purple-400 transition-all duration-300">
-                    <div className="aspect-video bg-black rounded-lg mb-4 relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 flex items-center justify-center">
-                        <div className="text-white text-6xl font-bold">🔥</div>
-                      </div>
-                      <div className="text-center text-white/80 text-sm mt-2">Hot Picks</div>
-                    </div>
-                    <h3 className="text-lg font-semibold mb-2 text-gray-900">Street Style</h3>
-                    <p className="text-gray-600 text-sm">Urban fashion meets comfort</p>
-                  </div>
-                </div>
-                <div className="relative group">
-                  <div className="bg-gradient-to-br from-green-50 to-teal-100 rounded-xl p-6 border border-green-200 hover:border-green-400 transition-all duration-300">
-                    <div className="aspect-video bg-black rounded-lg mb-4 relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-r from-green-600/20 to-teal-600/20 flex items-center justify-center">
-                        <div className="text-white text-6xl font-bold">⚡</div>
-                      </div>
-                      <div className="text-center text-white/80 text-sm mt-2">Eco Friendly</div>
-                    </div>
-                    <h3 className="text-lg font-semibold mb-2 text-gray-900">Sustainable Choice</h3>
-                    <p className="text-gray-600 text-sm">Made with recycled materials</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          
-          {loading ? (
-            <div className="flex items-center justify-center min-h-[400px]">
-              <div className="text-center">
-                <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-600 border-t-transparent mx-auto mb-4"></div>
-                <p className="text-lg text-gray-600">Loading amazing products...</p>
-              </div>
-            </div>
-          ) : (
-            <div className="space-y-8">
+          <div className="space-y-8">
               {/* Products Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {getCurrentPageProducts().map((product) => (
@@ -349,24 +277,6 @@ export default function Products() {
               )}
             </div>
           </div>
-
-          {/* Empty State */}
-          {products.length === 0 && !loading && (
-            <div className="text-center py-16">
-              <div className="bg-white p-8 max-w-md mx-auto rounded-2xl shadow-lg border border-gray-200">
-                <div className="w-24 h-24 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <span className="text-4xl">📦</span>
-                </div>
-                <h3 className="text-2xl font-bold mb-2 text-gray-900">No products found</h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">
-                  We're currently updating our inventory. Check back soon for amazing shoes!
-                </p>
-                <Button className="bg-gradient-to-r from-blue-600 to-orange-600 hover:from-blue-700 hover:to-orange-700 text-white font-bold px-6 py-3 rounded-full">
-                  Notify Me When Available
-                </Button>
-              </div>
-            </div>
-          )}
         </div>
       </main>
     </div>

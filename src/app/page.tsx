@@ -1,6 +1,7 @@
 import { Header } from '@/components/layout/header'
 import { Button } from '@/components/ui/button'
 import { Facebook, Twitter, Instagram, Youtube, Mail, Phone, MapPin, ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -11,7 +12,17 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center justify-center">
         {/* Background Image */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1920&q=80&auto=format&fit=crop')] bg-cover bg-center opacity-30"></div>
+          <video
+            className="absolute inset-0 h-full w-full object-cover opacity-35"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="none"
+            poster="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1920&q=80&auto=format&fit=crop"
+          >
+            <source src="https://pixabay.com/videos/download/video-3627_medium.mp4" type="video/mp4" />
+          </video>
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent"></div>
         </div>
@@ -49,17 +60,19 @@ export default function Home() {
             
             {/* CTA Buttons - Made more visible */}
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <Button 
-                size="lg" 
+              <Button
+                asChild
+                size="lg"
                 className="bg-white text-gray-900 hover:bg-gray-100 font-bold px-10 py-6 rounded-full text-xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 border-2 border-white/20 backdrop-blur-sm"
               >
-                Explore Collection
+                <Link href="/products">Explore Collection</Link>
               </Button>
-              <Button 
-                size="lg" 
+              <Button
+                asChild
+                size="lg"
                 className="border-2 border-white bg-white/20 backdrop-blur-md text-gray-900 hover:bg-white/30 hover:border-white/40 font-bold px-10 py-6 rounded-full text-xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300"
               >
-                Try AI Assistant
+                <Link href="/?chat=1">Try AI Assistant</Link>
               </Button>
             </div>
           </div>
@@ -194,17 +207,19 @@ export default function Home() {
                   Start your journey with NiceLand today and experience the future of shoe shopping
                 </p>
                 <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                  <Button 
-                    size="lg" 
+                  <Button
+                    asChild
+                    size="lg"
                     className="bg-white text-gray-900 hover:bg-gray-100 font-bold px-10 py-6 rounded-full text-xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300"
                   >
-                    Start Shopping
+                    <Link href="/products">Start Shopping</Link>
                   </Button>
-                  <Button 
+                  <Button
+                    asChild
                     size="lg"
                     className="border-2 border-gray-300 bg-white hover:bg-gray-50 text-gray-900 font-bold px-10 py-6 rounded-full text-xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300"
                   >
-                    Browse Collection
+                    <Link href="/products">Browse Collection</Link>
                   </Button>
                 </div>
               </div>
@@ -224,13 +239,79 @@ export default function Home() {
               Check out our most popular styles
             </p>
           </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="relative aspect-video bg-black">
+                <video
+                  className="absolute inset-0 h-full w-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="none"
+                  poster="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=1200&q=80&auto=format&fit=crop"
+                >
+                  <source src="https://pixabay.com/videos/download/video-3627_medium.mp4" type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="text-white text-xl font-bold">Performance Running</div>
+                  <div className="text-white/80 text-sm">Lightweight comfort for daily miles</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="relative aspect-video bg-black">
+                <video
+                  className="absolute inset-0 h-full w-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="none"
+                  poster="https://images.unsplash.com/photo-1600269452121-4f2416e55c28?w=1200&q=80&auto=format&fit=crop"
+                >
+                  <source src="https://pixabay.com/videos/download/video-3627_medium.mp4" type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="text-white text-xl font-bold">Street Essentials</div>
+                  <div className="text-white/80 text-sm">Everyday style, elevated</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="relative aspect-video bg-black">
+                <video
+                  className="absolute inset-0 h-full w-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="none"
+                  poster="https://images.unsplash.com/photo-1528701800489-20be3c5ea6fb?w=1200&q=80&auto=format&fit=crop"
+                >
+                  <source src="https://pixabay.com/videos/download/video-3627_medium.mp4" type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="text-white text-xl font-bold">Training Ready</div>
+                  <div className="text-white/80 text-sm">Support for every session</div>
+                </div>
+              </div>
+            </div>
+          </div>
           
           <div className="text-center mb-8">
-            <Button 
+            <Button
+              asChild
               size="lg"
               className="border-2 border-gray-300 hover:border-gray-400 bg-white hover:bg-gray-50 text-gray-700 font-bold px-8 py-4 rounded-lg transition-all duration-300"
             >
-              View All Products
+              <Link href="/products">View All Products</Link>
             </Button>
           </div>
         </div>

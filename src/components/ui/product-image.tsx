@@ -16,10 +16,23 @@ export function ProductImage({ images, name, className = '' }: ProductImageProps
   const [isHovered, setIsHovered] = useState(false)
   const [imageError, setImageError] = useState(false)
 
+  const normalizeImageUrl = (url: string) => {
+    if (!url) return url
+
+    // Some seed data may contain Unsplash page URLs (not direct images)
+    // Convert: https://unsplash.com/photos/<id> -> https://source.unsplash.com/<id>/800x800
+    const unsplashMatch = url.match(/^https?:\/\/unsplash\.com\/photos\/([^/?#]+)/i)
+    if (unsplashMatch?.[1]) {
+      return `https://source.unsplash.com/${unsplashMatch[1]}/800x800`
+    }
+
+    return url
+  }
+
   // Use a fallback image if no images or if there's an error
   const currentImage = (!images || images.length === 0 || imageError) 
     ? 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&q=80&auto=format&fit=crop'
-    : images[currentImageIndex] || 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&q=80&auto=format&fit=crop'
+    : normalizeImageUrl(images[currentImageIndex] || 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&q=80&auto=format&fit=crop')
 
   const handleImageError = () => {
     setImageError(true)

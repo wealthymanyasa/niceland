@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { MessageCircle, X, Send, Bot, User, Minimize2, Maximize2 } from 'lucide-react'
 import { getChatResponse } from '@/lib/openai'
@@ -13,12 +14,20 @@ interface Message {
 }
 
 export function AIChat() {
+  const searchParams = useSearchParams()
   const [isOpen, setIsOpen] = useState(false)
   const [isMinimized, setIsMinimized] = useState(false)
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (searchParams?.get('chat') === '1') {
+      setIsOpen(true)
+      setIsMinimized(false)
+    }
+  }, [searchParams])
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
